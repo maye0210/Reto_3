@@ -32,9 +32,24 @@ public class BikeController {
     public Optional<Bike> getBike(@PathVariable("id") int bikeId) {
         return bikeService.getBike(bikeId);
     }
+
+    @GetMapping("/{doc}")
+    public Optional<Bike> findById(@PathVariable("doc") int doc) {
+        return bikeService.getBike(doc);
+    }
+
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
     public Bike save(@RequestBody  Bike bike){
         return bikeService.save(bike);
     }
+
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Bike update(@RequestBody  Bike bike){ return bikeService.update(bike); }
+
+    @DeleteMapping("/{doc}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@PathVariable("doc") int doc) { return bikeService.delete(doc); }
+
 }

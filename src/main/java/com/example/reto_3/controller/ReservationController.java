@@ -1,5 +1,6 @@
 package com.example.reto_3.controller;
 
+import com.example.reto_3.entities.Bike;
 import com.example.reto_3.entities.Reservation;
 import com.example.reto_3.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,11 @@ public class ReservationController {
         return reservationService.getAll();
     }
 
+    @GetMapping("/{doc}")
+    public Optional<Reservation> findById(@PathVariable("doc") int doc) {
+        return reservationService.getReservation(doc);
+    }
+
     @GetMapping("/{id}")
     public Optional<Reservation> getReservation(@PathVariable("id") int reservationId) {
         return reservationService.getReservation(reservationId); }
@@ -37,4 +43,12 @@ public class ReservationController {
     public Reservation save(@RequestBody Reservation reservation){
         return reservationService.save(reservation);
     }
+
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Reservation update(@RequestBody  Reservation reservation){ return reservationService.update(reservation); }
+
+    @DeleteMapping("/{doc}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@PathVariable("doc") int doc) { return reservationService.delete(doc); }
 }

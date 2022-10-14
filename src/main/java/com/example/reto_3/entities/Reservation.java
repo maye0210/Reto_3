@@ -16,6 +16,7 @@ public class Reservation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Integer idReservation;
 
     private Date startDate;

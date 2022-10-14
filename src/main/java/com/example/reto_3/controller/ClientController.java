@@ -1,5 +1,6 @@
 package com.example.reto_3.controller;
 
+import com.example.reto_3.entities.Bike;
 import com.example.reto_3.entities.Client;
 import com.example.reto_3.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,11 @@ public class ClientController {
         return clientService.getAll();
     }
 
+    @GetMapping("/{doc}")
+    public Optional<Client> findById(@PathVariable("doc") int doc) {
+        return clientService.getClient(doc);
+    }
+
     @GetMapping("/{id}")
     public Optional<Client> getClient(@PathVariable("id") int clientId) {
         return clientService.getClient(clientId);
@@ -38,4 +44,12 @@ public class ClientController {
     public Client save(@RequestBody  Client client){
         return clientService.save(client);
     }
+
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Client update(@RequestBody  Client client){ return clientService.update(client); }
+
+    @DeleteMapping("/{doc}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@PathVariable("doc") int doc) { return clientService.delete(doc); }
 }

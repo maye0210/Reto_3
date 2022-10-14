@@ -1,5 +1,6 @@
 package com.example.reto_3.controller;
 
+import com.example.reto_3.entities.Bike;
 import com.example.reto_3.entities.Category;
 import com.example.reto_3.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,11 @@ public class CategoryController {
         return categoryService.getAll();
     }
 
+    @GetMapping("/{doc}")
+    public Optional<Category> findById(@PathVariable("doc") int doc) {
+        return categoryService.getCategory(doc);
+    }
+
     @GetMapping("/{id}")
     public Optional<Category> getCategory(@PathVariable("id") int categoryId) {
         return categoryService.getCategory(categoryId);
@@ -37,4 +43,12 @@ public class CategoryController {
     public Category save(@RequestBody  Category category){
         return categoryService.save(category);
     }
+
+    @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Category update(@RequestBody  Category category){ return categoryService.update(category); }
+
+    @DeleteMapping("/{doc}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public boolean delete(@PathVariable("doc") int doc) { return categoryService.delete(doc); }
 }

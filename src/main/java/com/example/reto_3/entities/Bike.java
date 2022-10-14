@@ -12,12 +12,11 @@ public class Bike {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Integer idBike;
-    private String name;
-
     private String brand;
-
     private Integer year;
+    private String name;
     private String description;
 
     @ManyToOne
@@ -33,7 +32,6 @@ public class Bike {
     @JsonIgnoreProperties({"bike","messages"})
     public List<Reservation> reservations;
 
-
     public Integer getIdBike() {
         return idBike;
     }
@@ -41,15 +39,6 @@ public class Bike {
     public void setIdBike(Integer idBike) {
         this.idBike = idBike;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getBrand() {
         return brand;
     }
@@ -64,6 +53,14 @@ public class Bike {
 
     public void setYear(Integer year) {
         this.year = year;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
