@@ -16,47 +16,47 @@ public class ReservationService {
     public List<Reservation> getAll(){
         return reservationRepository.getAll();
     }
-    public Optional<Reservation> getProduct(int id){
-        return reservationRepository.getReservation(id);
+    public Optional<Reservation> getReservation(int reservationId){
+        return reservationRepository.getReservation(reservationId);
     }
-    public Reservation save(Reservation p){
-        if(p.getIdReservation()==null){
-            return reservationRepository.save(p);
+    public Reservation save(Reservation reservation){
+        if(reservation.getIdReservation()==null){
+            return reservationRepository.save(reservation);
         }else{
-            Optional<Reservation> e =reservationRepository.getReservation(p.getIdReservation());
+            Optional<Reservation> e =reservationRepository.getReservation(reservation.getIdReservation());
             if(e.isPresent()){
-                return p;
+                return reservationRepository.save(reservation);
             }else{
-                return reservationRepository.save(p);
+                return reservation;
             }
         }
     }
-    public Reservation update(Reservation p){
-        if(p.getIdReservation()!=null){
-            Optional<Reservation> q =reservationRepository.getReservation(p.getIdReservation());
+    public Reservation update(Reservation reservation){
+        if(reservation.getIdReservation()!=null){
+            Optional<Reservation> q =reservationRepository.getReservation(reservation.getIdReservation());
             if(q.isPresent()){
-                if(p.getIdReservation()!=null){
-                    q.get().setIdReservation(p.getIdReservation());
+                if(reservation.getIdReservation()!=null){
+                    q.get().setIdReservation(reservation.getIdReservation());
                 }
-                if(p.getBike()!=null){
-                    q.get().setBike(p.getBike());
+                if(reservation.getBike()!=null){
+                    q.get().setBike(reservation.getBike());
                 }
-                if(p.getCliente()!=null){
-                    q.get().setCliente(p.getCliente());
+                if(reservation.getClient()!=null){
+                    q.get().setClient(reservation.getClient());
                 }
-                if(p.getFechainicio()!=null){
-                    q.get().setFechainicio(p.getFechainicio());
+                if(reservation.getStartDate()!=null){
+                    q.get().setStartDate(reservation.getStartDate());
                 }
-                if(p.getFechafin()!=null){
-                    q.get().setFechafin(p.getFechafin());
+                if(reservation.getDevolutionDate()!=null){
+                    q.get().setDevolutionDate(reservation.getDevolutionDate());
                 }
                 reservationRepository.save(q.get());
                 return q.get();
             }else{
-                return p;
+                return reservation;
             }
         }else{
-            return p;
+            return reservation;
         }
     }
     public boolean delete(int id){

@@ -17,36 +17,35 @@ public class ClientService {
     public List<Client> getAll(){
         return clientRepository.getAll();
     }
-    public Optional<Client> getProduct(int id){
-        return clientRepository.getClient(id);
+    public Optional<Client> getClient(int clientId){
+        return clientRepository.getClient(clientId);
     }
-    public Client save(Client p){
-        if(p.getIdClient()==null){
-            return clientRepository.save(p);
+    public Client save(Client client){
+        if(client.getIdClient()==null){
+            return clientRepository.save(client);
         }else{
-            Optional<Client> e = clientRepository.getClient(p.getIdClient());
+            Optional<Client> e = clientRepository.getClient(client.getIdClient());
             if(e.isPresent()){
-
-                return p;
+                return clientRepository.save(client);
             }else{
-                return clientRepository.save(p);
+                return client;
             }
         }
     }
-    public Client update(Client p){
-        if(p.getIdClient()!=null){
-            Optional<Client> q = clientRepository.getClient(p.getIdClient());
+    public Client update(Client client){
+        if(client.getIdClient()!=null){
+            Optional<Client> q = clientRepository.getClient(client.getIdClient());
             if(q.isPresent()){
-                if(p.getName()!=null){
-                    q.get().setName(p.getName());
+                if(client.getName()!=null){
+                    q.get().setName(client.getName());
                 }
                 clientRepository.save(q.get());
                 return q.get();
             }else{
-                return p;
+                return client;
             }
         }else{
-            return p;
+            return client;
         }
     }
     public boolean delete(int id){

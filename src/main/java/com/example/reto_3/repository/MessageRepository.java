@@ -15,15 +15,15 @@ public class MessageRepository {
     public List<Message> getAll(){
         return (List<Message>) messageCrudRepository.findAll();
     }
+    public Optional<Message> getMessage(int id){
+        return messageCrudRepository.findById(String.valueOf(id));
+    }
 
-    public Optional<Message> getBike(int id){
-        return messageCrudRepository.findById("String");
+    public Message save(Message message){
+        return messageCrudRepository.save(message);
     }
-    public Message save(Message c){
-        return messageCrudRepository.save(c);
-    }
-    public void delete(Message c){
-        messageCrudRepository.delete(c);
+    public void delete(Message message){
+        messageCrudRepository.delete(message);
     }
 
 }

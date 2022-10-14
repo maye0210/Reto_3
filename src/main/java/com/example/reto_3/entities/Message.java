@@ -1,8 +1,13 @@
 package com.example.reto_3.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.io.Serializable;
 
 @Entity
@@ -11,52 +16,52 @@ public class Message implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String name;
-    private String target;
-    private String description;
+    private Integer idMessage;
+
+    private String messageText;
+
     @ManyToOne
-    @JoinColumn(name = "categoryId")
-    @JsonIgnoreProperties("bikes")
-    private Category category;
+    @JoinColumn(name="bikeId")
+    @JsonIgnoreProperties({"messages","reservations"})
+    private Bike bike;
 
-    public Integer getId() {
-        return id;
+    @ManyToOne
+    @JoinColumn(name="clientId")
+    @JsonIgnoreProperties({"messages","reservations"})
+    private Client client;
+
+
+    public Integer getIdMessage() {
+        return idMessage;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdMessage(Integer idMessage) {
+        this.idMessage = idMessage;
     }
 
-    public String getName() {
-        return name;
+    public String getMessageText() {
+        return messageText;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMessageText(String messageText) {
+        this.messageText = messageText;
     }
 
-    public String getTarget() {
-        return target;
+    public Bike getBike() {
+        return bike;
     }
 
-    public void setTarget(String target) {
-        this.target = target;
+    public void setBike(Bike bike) {
+        this.bike = bike;
     }
 
-    public String getDescription() {
-        return description;
+    public Client getClient() {
+        return client;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setClient(Client client) {
+        this.client = client;
     }
 
-    public Category getCategory() {
-        return category;
-    }
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
 }

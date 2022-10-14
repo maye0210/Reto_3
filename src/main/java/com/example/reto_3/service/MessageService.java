@@ -19,50 +19,44 @@ public class MessageService {
     public List<Message> getAll(){
         return messageRepository.getAll();
     }
-    public Optional<Message> getBike(int id){
-        return messageRepository.getBike(id);
+    public Optional<Message> getMessage(int messageId){
+        return messageRepository.getMessage(messageId);
     }
-    public Message save(Message p){
-        if(p.getId()==null){
-            return messageRepository.save(p);
+    public Message save(Message message){
+        if(message.getIdMessage()==null){
+            return messageRepository.save(message);
         }else{
-            Optional<Message> e = messageRepository.getBike(p.getId());
+            Optional<Message> e = messageRepository.getMessage(message.getIdMessage());
             if(e.isPresent()){
-                return p;
+                return message;
             }else{
-                return messageRepository.save(p);
+                return messageRepository.save(message);
             }
         }
     }
-    public Message update(Message p){
-        if(p.getId()!=null){
-            Optional<Message> q = messageRepository.getBike(p.getId());
+    public Message update(Message message){
+        if(message.getIdMessage()!=null){
+            Optional<Message> q = messageRepository.getMessage(message.getIdMessage());
             if(q.isPresent()){
-                if(p.getName()!=null){
-                    q.get().setName(p.getName());
+                if(message.getIdMessage()!=null){
+                    q.get().setIdMessage(message.getIdMessage());
                 }
-                if(p.getDescription()!=null){
-                    q.get().setDescription(p.getDescription());
-                }
-                if(p.getTarget()!=null){
-                    q.get().setTarget(p.getTarget());
-                }
-                if(p.getCategory()!=null){
-                    q.get().setCategory(p.getCategory());
+                if(message.getMessageText()!=null){
+                    q.get().setMessageText(message.getMessageText());
                 }
 
                 messageRepository.save(q.get());
                 return q.get();
             }else{
-                return p;
+                return message;
             }
         }else{
-            return p;
+            return message;
         }
     }
     public boolean delete(int id){
         boolean flag=false;
-        Optional<Message>p= messageRepository.getBike(id);
+        Optional<Message>p= messageRepository.getMessage(id);
         if(p.isPresent()){
             messageRepository.delete(p.get());
             flag=true;

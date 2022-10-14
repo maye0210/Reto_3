@@ -15,47 +15,46 @@ public class BikeService {
     private BikeRepository bikeRepository;
 
     public List<Bike> getAll(){
-        return bikeRepository.getAll();
+        return bikeRepository.getAll(); }
+    public Optional<Bike> getBike(int bikeId){
+        return bikeRepository.getBike(bikeId);
     }
-    public Optional<Bike> getLibrary(int id){
-        return bikeRepository.getBike(id);
-    }
-    public Bike save(Bike p){
-        if(p.getId()==null){
-            return bikeRepository.save(p);
+    public Bike save(Bike bike){
+        if(bike.getIdBike()==null){
+            return bikeRepository.save(bike);
         }else{
-            Optional<Bike> e = bikeRepository.getBike(p.getId());
+            Optional<Bike> e = bikeRepository.getBike(bike.getIdBike());
             if(e.isPresent()){
-                return p;
+                return bike;
             }else{
-                return bikeRepository.save(p);
+                return bikeRepository.save(bike);
             }
         }
     }
-    public Bike update(Bike p){
-        if(p.getId()!=null){
-            Optional<Bike> q = bikeRepository.getBike(p.getId());
+    public Bike update(Bike bike){
+        if(bike.getIdBike()!=null){
+            Optional<Bike> q = bikeRepository.getBike(bike.getIdBike());
             if(q.isPresent()){
-                if(p.getName()!=null){
-                    q.get().setName(p.getName());
+                if(bike.getName()!=null){
+                    q.get().setName(bike.getName());
                 }
-                if(p.getDescription()!=null){
-                    q.get().setDescription(p.getDescription());
+                if(bike.getDescription()!=null){
+                    q.get().setDescription(bike.getDescription());
                 }
-                if(p.getBrand()!=null){
-                    q.get().setBrand(p.getBrand());
+                if(bike.getBrand()!=null){
+                    q.get().setBrand(bike.getBrand());
                 }
-                if(p.getCategory()!=null){
-                    q.get().setCategory(p.getCategory());
+                if(bike.getCategory()!=null){
+                    q.get().setCategory(bike.getCategory());
                 }
 
                 bikeRepository.save(q.get());
                 return q.get();
             }else{
-                return p;
+                return bike;
             }
         }else{
-            return p;
+            return bike;
         }
     }
     public boolean delete(int id){
