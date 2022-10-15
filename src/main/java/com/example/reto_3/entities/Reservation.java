@@ -29,14 +29,12 @@ public class Reservation {
     @JoinColumn(name = "bikeId")
     @JsonIgnoreProperties("reservations")
     private Bike bike;
-
     @ManyToOne
     @JoinColumn(name = "clientId")
     @JsonIgnoreProperties({"reservations","messages"})
     private Client client;
 
     private String score;
-
 
 
     public Integer getIdReservation() {
@@ -71,20 +69,20 @@ public class Reservation {
         this.status = status;
     }
 
-    public Bike getBike() {
-        return bike;
-    }
-
-    public void setBike(Bike bike) {
-        this.bike = bike;
-    }
-
     public Client getClient() {
         return client;
     }
 
     public void setClient(Client client) {
         this.client = client;
+    }
+
+    public Bike getBike() {
+        return bike;
+    }
+
+    public void setBike(Bike bike) {
+        this.bike = bike;
     }
 
     public String getScore() {

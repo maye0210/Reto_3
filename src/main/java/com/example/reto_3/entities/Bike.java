@@ -14,9 +14,9 @@ public class Bike {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Integer id;
+    private String name;
     private String brand;
     private Integer year;
-    private String name;
     private String description;
 
     @ManyToOne
@@ -36,8 +36,16 @@ public class Bike {
         return id;
     }
 
-    public void setId(Integer idBike) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
     public String getBrand() {
         return brand;
@@ -55,15 +63,7 @@ public class Bike {
         this.year = year;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
+   public String getDescription() {
         return description;
     }
 
