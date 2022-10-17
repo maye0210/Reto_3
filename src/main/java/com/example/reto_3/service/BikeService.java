@@ -31,26 +31,35 @@ public class BikeService {
             }
         }
     }
-    public Bike update(Bike bike){
-        if(bike.getId()!=null){
+    public Bike update(Bike bike) {
+        if (bike.getId() != null) {
             Optional<Bike> q = bikeRepository.getBike(bike.getId());
-            if(q.isPresent()){
-                if(bike.getName()!=null){
+            if (q.isPresent()) {
+                if (bike.getName() != null) {
                     q.get().setName(bike.getName());
                 }
-                if(bike.getDescription()!=null){
-                    q.get().setDescription(bike.getDescription());
-                }
-                if(bike.getBrand()!=null){
+                if (bike.getBrand() != null) {
                     q.get().setBrand(bike.getBrand());
                 }
-                if(bike.getCategory()!=null){
+                if (bike.getYear() != null) {
+                    q.get().setYear(bike.getYear());
+                }
+                if (bike.getDescription() != null) {
+                    q.get().setDescription(bike.getDescription());
+                }
+                if (bike.getCategory() != null) {
                     q.get().setCategory(bike.getCategory());
+                }
+                if (bike.getMessages() != null) {
+                    q.get().setMessages(bike.getMessages());
+                }
+                if (bike.getReservations() != null) {
+                    q.get().setReservations(bike.getReservations());
                 }
 
                 bikeRepository.save(q.get());
                 return q.get();
-            }else{
+            } else {
                 return bike;
             }
         }else{

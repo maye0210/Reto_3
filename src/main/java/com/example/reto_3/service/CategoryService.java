@@ -35,19 +35,26 @@ public class CategoryService {
             }
         }
     }
+
     public Category update(Category category){
-        if(category.getId()!=null){
+        if (category.getId()!=null){
             Optional<Category> q = categoryRepository.getCategory(category.getId());
-            if(q.isPresent()){
+            if ((q.isPresent())){
                 if(category.getName()!=null){
                     q.get().setName(category.getName());
                 }
+                if(category.getDescription()!=null){
+                    q.get().setDescription(category.getDescription());
+                }
+                if(category.getBikes()!=null){
+                    q.get().setBikes(category.getBikes());
+                }
                 categoryRepository.save(q.get());
                 return q.get();
-            }else{
+            }else {
                 return category;
             }
-        }else{
+        }else {
             return category;
         }
     }
